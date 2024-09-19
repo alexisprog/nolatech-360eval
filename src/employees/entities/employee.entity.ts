@@ -6,6 +6,9 @@ export type EmployeeDocument = HydratedDocument<Employee>;
 @Schema({ timestamps: true })
 export class Employee {
   @Prop()
+  dni: string;
+
+  @Prop()
   first_name: string;
 
   @Prop()
