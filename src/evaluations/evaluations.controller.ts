@@ -43,11 +43,13 @@ export class EvaluationsController {
   }
 
   @Get(':id')
+  @Auth(Role.MANAGER)
   findOne(@Param('id') id: string) {
     return this.evaluationsService.findOne(id);
   }
 
   @Patch(':id')
+  @Auth(Role.MANAGER)
   update(
     @Param('id') id: string,
     @Body() updateEvaluationDto: UpdateEvaluationDto,

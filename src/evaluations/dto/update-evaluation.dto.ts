@@ -10,7 +10,12 @@ export class Feedbacks {
   @IsNotEmpty()
   competency: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Scale value',
+    minimum: 1,
+    maximum: 5,
+    default: 1,
+  })
   @IsNumber()
   value: number;
 }
