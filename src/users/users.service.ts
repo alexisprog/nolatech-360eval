@@ -31,7 +31,7 @@ export class UsersService implements OnModuleInit {
   }
 
   async findOneByEmail(email: string) {
-    return await this.userModel.findOne({ email });
+    return (await this.userModel.findOne({ email })).populate('employee');
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {

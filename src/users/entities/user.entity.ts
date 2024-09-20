@@ -7,20 +7,20 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema({ timestamps: true })
 export class User {
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()
   password: string;
 
-  @Prop({ default: Role.EMPLOYEE })
+  @Prop({ enum: Role, default: Role.EMPLOYEE })
   role: Role;
 
   @Prop({
     ref: Employee.name,
     type: MongooseSchema.Types.ObjectId,
   })
-  employee?: MongooseSchema.Types.ObjectId;
+  employee?: Employee;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

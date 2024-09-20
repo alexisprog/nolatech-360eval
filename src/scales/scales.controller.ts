@@ -4,6 +4,7 @@ import { UpdateScaleDto } from './dto/update-scale.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/common/enums/role.enum';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @ApiTags('Scales')
 @Controller('scales')
@@ -11,7 +12,7 @@ export class ScalesController {
   constructor(private readonly scalesService: ScalesService) {}
 
   @Get()
-  @Auth(Role.ADMIN)
+  @Public()
   findAll() {
     return this.scalesService.findAll();
   }
