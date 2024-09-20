@@ -25,12 +25,12 @@ import { EvaluationsModule } from './evaluations/evaluations.module';
       },
       inject: [ConfigService],
     }),
-    EmployeesModule,
-    UsersModule,
     AuthModule,
-    ScalesModule,
+    UsersModule,
+    EmployeesModule,
     CompetenciesModule,
     EvaluationsModule,
+    ScalesModule,
   ],
 })
 export class AppModule {}
