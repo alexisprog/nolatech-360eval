@@ -1,10 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
 
 export type EmployeeDocument = HydratedDocument<Employee>;
 
 @Schema({ timestamps: true })
 export class Employee {
+  _id: MongooseSchema.Types.ObjectId;
+
   @Prop({ unique: true })
   dni: string;
 
