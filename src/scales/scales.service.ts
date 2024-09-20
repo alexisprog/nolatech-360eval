@@ -19,7 +19,7 @@ export class ScalesService implements OnModuleInit {
           { points: 4, description: 'Casi Siempre' },
           { points: 5, description: 'Siempre' },
         ]);
-        console.log('Create default scale');
+        console.log('Create default scale likert (1 = Nunca -> 5 = Siempre)');
       }
     } catch (error) {
       throw error;

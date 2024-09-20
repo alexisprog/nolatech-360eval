@@ -3,6 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig, { CONFIG_DATABASE } from './config/database.config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EmployeesModule } from './employees/employees.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { ScalesModule } from './scales/scales.module';
+import { CompetenciesModule } from './competencies/competencies.module';
 
 @Module({
   imports: [
@@ -21,6 +25,10 @@ import { EmployeesModule } from './employees/employees.module';
       inject: [ConfigService],
     }),
     EmployeesModule,
+    UsersModule,
+    AuthModule,
+    ScalesModule,
+    CompetenciesModule,
   ],
 })
 export class AppModule {}
