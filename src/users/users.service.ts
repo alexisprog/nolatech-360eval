@@ -12,7 +12,7 @@ export class UsersService implements OnModuleInit {
 
   async onModuleInit() {
     try {
-      const res = await this.userModel.find();
+      const res = await this.userModel.find({ role: Role.ADMIN });
       if (res.length === 0) {
         const hashedPassword = await bcryptjs.hash('administrator', 10);
         const newUser: CreateUserDto = {
@@ -21,9 +21,22 @@ export class UsersService implements OnModuleInit {
           role: Role.ADMIN,
         };
         await this.create(newUser);
-        console.log('Create user admin');
+        console.log('Created default user admin');
         console.log('email:', 'admin@nolatech.ai');
         console.log('password:', 'administrator');
+      }
+      const resM = await this.userModel.find({ role: Role.MANAGER });
+      if (resM.length === 0) {
+        const hashedPassword = await bcryptjs.hash('manager', 10);
+        const newUser: CreateUserDto = {
+          email: 'manager@nolatech.ai',
+          password: hashedPassword,
+          role: Role.MANAGER,
+        };
+        await this.create(newUser);
+        console.log('Created default user manager');
+        console.log('email:', 'manager@nolatech.ai');
+        console.log('password:', 'manager');
       }
     } catch (error) {
       throw error;
@@ -31,7 +44,7 @@ export class UsersService implements OnModuleInit {
   }
 
   async findOneByEmail(email: string) {
-    return (await this.userModel.findOne({ email })).populate('employee');
+    return await this.userModel.findOne({ email }).populate('employee');
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {

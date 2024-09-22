@@ -10,7 +10,6 @@ import { EmployeesService } from 'src/employees/employees.service';
 import { Role } from 'src/common/enums/role.enum';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 
 @Injectable()
 export class AuthService {
@@ -35,9 +34,9 @@ export class AuthService {
 
     const payload = { _id: user._id, email, role: user.role };
     const token = await this.jwtService.signAsync(payload);
-
     return {
       token,
+      user,
     };
   }
 
@@ -80,9 +79,5 @@ export class AuthService {
     return {
       email,
     };
-  }
-
-  async profile({ email }: UserActiveInterface) {
-    return await this.usersService.findOneByEmail(email);
   }
 }

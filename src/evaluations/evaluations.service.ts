@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateEvaluationDto } from './dto/create-evaluation.dto';
 import {
   FeedbackEvaluationDto,
@@ -73,12 +69,12 @@ export class EvaluationsService {
     }
     const validated = !user?.employee?._id
       ? false
-      : user.employee._id !== evaluation.evaluated_by._id
+      : String(user.employee._id) !== String(evaluation.evaluated_by._id)
         ? false
         : true;
 
     if (!validated) {
-      throw new UnauthorizedException();
+      throw new BadRequestException('You are not the evaluator');
     }
 
     return await this.evaluationModel.findByIdAndUpdate(
