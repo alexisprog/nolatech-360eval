@@ -31,7 +31,7 @@ export class EvaluationsController {
   }
 
   @Get()
-  @Auth(Role.ADMIN)
+  @Auth(Role.MANAGER)
   findAll() {
     return this.evaluationsService.findAll();
   }
@@ -58,7 +58,7 @@ export class EvaluationsController {
   }
 
   @Delete(':id')
-  @Auth(Role.ADMIN)
+  @Auth(Role.MANAGER)
   remove(@Param('id') id: string) {
     return this.evaluationsService.remove(id);
   }

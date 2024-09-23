@@ -26,7 +26,7 @@ export class CompetenciesController {
   }
 
   @Get()
-  @Auth(Role.ADMIN)
+  @Auth(Role.MANAGER)
   findAll() {
     return this.competenciesService.findAll();
   }
